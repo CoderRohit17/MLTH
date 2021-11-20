@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mlth/loginpage.dart';
+import 'package:mlth/meta/ui/loginpage.dart';
+import 'package:mlth/welcomeScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,21 +32,17 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  bool _visible = false;
+  bool _visible = true;
   @override
   void initState() {
-    // TODO: implement initState
-    Future.delayed(const Duration(seconds: 1),
-        (){
-      _visible = !_visible;
-    });
+
 
     Future.delayed(
       const Duration(seconds: 3),
       () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const LoginPage(),
+          builder: (context) => WelcomePage(),
         ),
       ),
     );

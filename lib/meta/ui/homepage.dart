@@ -1,12 +1,39 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:mlth/stockpage.dart';
+import 'package:mlth/meta/ui/stockpage.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+final _controller = PageController(
+  initialPage: 0,
+);
+int _currentPage = 0;
+
+class _HomePageState extends State<HomePage> {
+  final List<String> imgList = [
+    "assets/images/banner0.jpg",
+    "assets/images/banner1.jpg",
+    "assets/images/banner2.jpg",
+    "assets/images/banner3.jpg",
+    "assets/images/banner4.jpg",
+  ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         title: const Text(
           "MLTH",
@@ -16,28 +43,81 @@ class HomePage extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: const Color(0xff94b0ae),
-
+        backgroundColor: const Color(0xff009348),
       ),
+
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            Image.asset(
-              'assets/images/back_yellow.png',
-              fit: BoxFit.cover,
-              // height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
+            Padding(
+              padding: const EdgeInsets.only(top: 180),
+              child: Material(
+                elevation: 0,
+                child: Opacity(
+                  opacity: 0.3,
+                  child: Container(
+                    child: Image.asset(
+                      'assets/images/garden.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
             ),
             Column(
               children: [
                 Container(
                   height: 175,
                   width: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/banner.jpg'),
-                      fit: BoxFit.cover,
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                      height: 400,
+                      aspectRatio: 16 / 9,
+                      viewportFraction: 1,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 3),
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _currentPage = index;
+                        });
+                      },
+                      scrollDirection: Axis.horizontal,
                     ),
+                    items: [0, 1, 2, 3, 4].map((i) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: EdgeInsets.symmetric(horizontal: 1.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                            ),
+                            child: Image.asset(
+                              imgList[i],
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ),
+                DotsIndicator(
+                  dotsCount: imgList.length,
+                  position: _currentPage.toDouble(),
+                  decorator: DotsDecorator(
+                    size: const Size.square(9.0),
+                    activeSize: const Size(18.0, 9.0),
+                    activeShape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    activeColor: Colors.red,
                   ),
                 ),
                 Padding(
@@ -86,7 +166,9 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Expanded(child: Container(),),
+                      Expanded(
+                        child: Container(),
+                      ),
                       Container(
                         height: 75,
                         width: 75,
@@ -104,7 +186,7 @@ class HomePage extends StatelessWidget {
                           children: [
                             CircleAvatar(
                               backgroundImage:
-                              AssetImage('assets/images/logo.png'),
+                                  AssetImage('assets/images/logo.png'),
                               radius: 20.0,
                               backgroundColor: Colors.transparent,
                             ),
@@ -119,7 +201,9 @@ class HomePage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Expanded(child: Container(),),
+                      Expanded(
+                        child: Container(),
+                      ),
                       Container(
                         height: 75,
                         width: 75,
@@ -137,7 +221,7 @@ class HomePage extends StatelessWidget {
                           children: [
                             CircleAvatar(
                               backgroundImage:
-                              AssetImage('assets/images/logo.png'),
+                                  AssetImage('assets/images/logo.png'),
                               radius: 20.0,
                               backgroundColor: Colors.transparent,
                             ),
@@ -161,11 +245,16 @@ class HomePage extends StatelessWidget {
         ),
       ),
       drawer: Drawer(
+
         child: ListView(
           // Important: Remove any padding from the ListView.
+
           padding: EdgeInsets.zero,
           children: <Widget>[
             const UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: const Color(0xff009348),
+              ),
               accountName: Text("Abhishek Mishra"),
               accountEmail: Text("abhishekm977@gmail.com"),
               currentAccountPicture: CircleAvatar(
@@ -176,6 +265,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+
             ListTile(
               leading: Icon(Icons.speed),
               visualDensity: VisualDensity(horizontal: 0, vertical: -4),
@@ -204,9 +294,6 @@ class HomePage extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-
-
-
             const Divider(
               thickness: 1,
               color: Colors.grey,
@@ -227,7 +314,6 @@ class HomePage extends StatelessWidget {
               thickness: 1,
               color: Colors.grey,
             ),
-
             ListTile(
               leading: Icon(Icons.account_balance_rounded),
               title: Text(

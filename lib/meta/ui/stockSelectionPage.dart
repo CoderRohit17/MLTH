@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mlth/paymentCheckoutPage.dart';
+import 'package:mlth/meta/ui/paymentCheckoutPage.dart';
 
 class StockSelectionDetailPage extends StatelessWidget {
   const StockSelectionDetailPage({Key? key}) : super(key: key);
@@ -77,7 +77,7 @@ class StockSelectionDetailPage extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: const Color(0xff94b0ae),
+        backgroundColor: const Color(0xff009348),
       ),
       backgroundColor: Color(0xff198e98),
       body: SingleChildScrollView(
