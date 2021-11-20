@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
         backgroundColor: const Color(0xff94b0ae),
-        automaticallyImplyLeading: false,
+
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -156,6 +156,109 @@ class HomePage extends StatelessWidget {
                   ),
                 )
               ],
+            ),
+          ],
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const UserAccountsDrawerHeader(
+              accountName: Text("Abhishek Mishra"),
+              accountEmail: Text("abhishekm977@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.orange,
+                child: Text(
+                  "A",
+                  style: TextStyle(fontSize: 40.0),
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.speed),
+              visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+              dense: true,
+              title: Text(
+                "Dashboard",
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            const Divider(
+              thickness: 1,
+              color: Colors.grey,
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text(
+                "User Profile",
+                style: TextStyle(fontSize: 20),
+              ),
+              visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+              dense: true,
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+
+
+
+            const Divider(
+              thickness: 1,
+              color: Colors.grey,
+            ),
+            ListTile(
+              leading: Icon(Icons.notifications_active_outlined),
+              title: Text(
+                "Notification",
+                style: TextStyle(fontSize: 20),
+              ),
+              visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+              dense: true,
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            const Divider(
+              thickness: 1,
+              color: Colors.grey,
+            ),
+
+            ListTile(
+              leading: Icon(Icons.account_balance_rounded),
+              title: Text(
+                "Account",
+                style: TextStyle(fontSize: 20),
+              ),
+              visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+              dense: true,
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            const Divider(
+              thickness: 1,
+              color: Colors.grey,
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text(
+                "Logout",
+                style: TextStyle(fontSize: 20),
+              ),
+              visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+              dense: true,
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            const Divider(
+              thickness: 1,
+              color: Colors.grey,
             ),
           ],
         ),
